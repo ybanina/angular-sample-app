@@ -1,0 +1,40 @@
+<div class="well no-background no-border">
+    <form class="form-horizontal"
+          name="vm.updatePositionForm"
+          ng-submit="vm.onUpdateSubmit()">
+        <div class="form-group">
+            <div class="col-sm-6">
+                <label>Position:</label>
+                <input name="name" class="form-control" type="text"
+                       ng-model="vm.position.name">
+                <validation-messages form="vm.updatePositionForm"
+                                     model="vm.position"
+                                     field-name="name"></validation-messages>
+            </div>
+            <div class="col-sm-6">
+                <label>Parent position:</label>
+                <data-position-select
+                        model="vm.position.parentPosition"
+                        title="Parent position"
+                        placeholder="Search by position"
+                        name="parentPosition">
+                </data-position-select>
+                <validation-messages form="vm.updatePositionForm"
+                                     model="vm.position"
+                                     field-name="parentPosition"></validation-messages>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group text-right">
+            <div class="col-sm-12">
+                <button ng-click="vm.onUpdateSubmitCancel()"
+                        class="btn btn-default" type="button">Back to list
+                </button>
+                <button class="btn btn-primary" type="submit">Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,98 @@
+<div class="well no-background no-border">
+    <div class="well well-lg no-background no-border no-padding">
+        <button class="btn btn-primary pull-right" type="button"
+                ng-show="!vm.positionViewModel" ng-click="vm.onCreateNewPosition()">Add position
+        </button>
+        <h2>Organization structure</h2>
+    </div>
+
+
+    <!--Position Create Form-->
+    <div uib-collapse="!vm.positionViewModel" class="well no-background">
+        <form class="form-horizontal" name="vm.createPositionForm" ng-submit="vm.onCreateSubmit()">
+            <div class="form-group">
+
+                <div class="col-sm-6">
+                    <label>Position:</label>
+                    <input name="name" class="form-control" type="text"
+                           ng-model="vm.positionViewModel.name">
+                    <validation-messages form="vm.createPositionForm"
+                                         model="vm.positionViewModel"
+                                         field-name="name"></validation-messages>
+                </div>
+                <div class="col-sm-6">
+                    <label>Parent position:</label>
+                    <data-position-select
+                            model="vm.positionViewModel.parentPosition"
+                            title="Parent position"
+                            placeholder="Search by position"
+                            name="parentPosition">
+                    </data-position-select>
+                    <validation-messages form="vm.createPositionForm"
+                                         model="vm.positionViewModel"
+                                         field-name="parentPosition"></validation-messages>
+                </div>
+            </div>
+
+            <div class="form-group text-right">
+                <div class="col-sm-12">
+                    <button ng-click="vm.onCreateNewPositionCancel()" class="btn btn-default" type="button">Cancel
+                    </button>
+                    <button class="btn btn-primary" type="submit" ng-disabled="vm.isRequesting()">Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--Search-->
+    <div class="well no-margin no-background no-padding-horizontal no-border">
+        <form class="form-horizontal">
+            <div class="form-group no-margin-bottom">
+                <div class="col-xs-3">
+                    <input class="form-control" type="search" placeholder="Search by position"
+                           ng-model="vm.positionsCollectionFilter.search"
+                           ng-change="vm.onFilterUpdated()"
+                           ng-model-options='{ debounce: 500 }'>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Positions Collection-->
+    <div ng-repeat="position in vm.positionsCollection.list">
+        <!-- Position view-->
+        <div ng-if="!position.editMode" class="well well-sm no-background">
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>Position: <b>{{position.name}}</b></p>
+                    <p ng-if="position.parentPosition">Parent position: <b>{{position.parentPosition.name}}</b>
+                    </p>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-2" ng-if="position.kpis.length > 0">KPI:</div>
+                        <div class="col-xs-10">
+                            <div ng-repeat="kpi in position.kpis" class="text-ellipsis">
+                                <div class="badge badge-secondary m-b-5">
+                                    <span title="{{kpi.title}}">{{kpi.title}} </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 text-right">
+                    <button class="btn-sm btn-link" ui-sref="root.positions.update({positionId:position.id})">
+                        <i class="fa fa-pencil p-r-5" aria-hidden="true"></i> Edit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="vm.positionsCollection.pagination.pagesCount > 1" class="text-center">
+        <pagination pagination="vm.positionsCollection.pagination" on-change="vm.onPaginationChange()"></pagination>
+    </div>
+</div>
+
+

@@ -1,0 +1,152 @@
+<section id="login">
+    <div class="container-fluid">
+        <div class="wrapper-login">
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li ng-class="{'active' : vm.tabItem == 'login'}"
+                            ng-click="vm.tabs('login')">
+                            <a data-toggle="tab" href
+                               data-target="#signIn" role="tab"
+                               aria-controls="nav-home" aria-expanded="true">Sign in</a>
+                        </li>
+
+                        <li ng-class="{'active' : vm.tabItem == 'registration'}"
+                            ng-click="vm.tabs('registration')">
+                            <a data-toggle="tab" href data-target="#signUp" role="tab"
+                               aria-controls="nav-home" aria-expanded="true">Registration</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="tab-content">
+                    <div ng-class="{'active' : vm.tabItem == 'login'}"
+                         class="card-block tab-pane" id="signIn" role="tabpanel">
+                        <form name="login" class="p-20" ng-submit="vm.onLoginSubmit()">
+                            <div class="form-group">
+                                <div class="col">
+                                    <input type="email" id="inputEmail" class="form-control"
+                                           placeholder="email" required="" autofocus=""
+                                           ng-model="vm.loginViewModel.login">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col">
+                                    <input type="password" id="inputPassword" class="form-control"
+                                           placeholder="Пароль" required="" ng-model="vm.loginViewModel.password">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="checkbox col">
+                                    <label>
+                                        <input class="align-middle" type="checkbox"
+                                               ng-model="vm.loginViewModel.rememberMe">
+                                        Оставаться в системе
+                                    </label>
+
+                                    <a href="" ui-sref="publicRoot.request-reset-password" class="pull-right">Forget password?</a>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <button class="btn btn-primary btn-block" type="submit">
+                                    Войти
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div ng-class="{'active' : vm.tabItem == 'registration'}" class="card-block tab-pane" id="signUp"
+                         role="tabpanel">
+                        <form name="vm.registerForm" ng-submit="vm.onRegistrationSubmit()" class="pb-3 pt-1">
+                            <div class="row p-20">
+                                <div class="col-xs-5">
+                                    <div class="well no-background no-border text-center">
+                                        <div class="avatar-label avatar-label-lg">
+                                            {{vm.registrationViewModel.lastName.charAt(0) + vm.registrationViewModel.firstName.charAt(0)}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-7">
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <input name="lastName" class="form-control" type="text" id="lastName"
+                                                   placeholder="Фамилия"
+                                                   ng-model="vm.registrationViewModel.lastName">
+                                            <validation-messages form="vm.registerForm"
+                                                                 model="vm.registrationViewModel"
+                                                                 field-name="lastName"></validation-messages>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <input name="firstName" class="form-control" type="text" id="firstName"
+                                                   placeholder="Имя"
+                                                   ng-model="vm.registrationViewModel.firstName">
+                                            <validation-messages form="vm.registerForm"
+                                                                 model="vm.registrationViewModel"
+                                                                 field-name="firstName"></validation-messages>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <input name="patronymic" class="form-control" type="text" id="patronymic"
+                                                   placeholder="Отчество"
+                                                   ng-model="vm.registrationViewModel.patronymic">
+                                            <validation-messages form="vm.registerForm"
+                                                                 model="vm.registrationViewModel"
+                                                                 field-name="patronymic"></validation-messages>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <input name="email" class="form-control" type="email" id="email"
+                                                   placeholder="email"
+                                                   ng-model="vm.registrationViewModel.email">
+                                            <validation-messages form="vm.registerForm"
+                                                                 model="vm.registrationViewModel"
+                                                                 field-name="email"></validation-messages>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <input name="password" class="form-control" type="password" id="password"
+                                                   placeholder="Пароль"
+                                                   ng-model="vm.registrationViewModel.password">
+                                            <validation-messages form="vm.registerForm"
+                                                                 model="vm.registrationViewModel"
+                                                                 field-name="password"></validation-messages>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <input name="passwordVerify" class="form-control" type="password"
+                                                   id="passwordRepeat" placeholder="Повторите пароль"
+                                                   ng-model="vm.registrationViewModel.passwordVerify">
+                                            <validation-messages form="vm.registerForm"
+                                                                 model="vm.registrationViewModel"
+                                                                 field-name="passwordVerify"></validation-messages>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col p-20">
+                                <button class="btn btn-block btn-primary" type="submit">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
